@@ -1,10 +1,13 @@
 all: build run
 
-build: main.c buffer.c
-	gcc -m32 -o data_gcc main.c buffer.c
+build: build_i
+	gcc -m32 -o demo_gcc main.o
+
+build_i:
+	gcc -m32 -E -o main.i main.o
 
 run:
-	./data_gcc
+	./demo_gcc
 
 clean:
-	rm -f data_gcc
+	rm -f demo_gcc
