@@ -2,7 +2,16 @@
 
 #define MSG "Hello, world!\n"
 
-int main() { // main function
+void print() { // print function
     printf(MSG);
+}
+
+int main() { // main function
+    #ifdef DEBUG
+    printf("Debug message\n");
+    #endif
+
+    print();
+
     return 0;
 }
