@@ -9,6 +9,9 @@ build_i:
 build_s:
 	gcc -m32 -S -o main.s main.i
 
+build_o:
+	gcc -m32 -c -o main.o main.s
+
 run:
 	./demo_gcc
 
