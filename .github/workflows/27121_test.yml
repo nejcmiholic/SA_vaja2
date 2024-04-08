@@ -9,7 +9,8 @@ jobs:
   setup_environment:
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up environment
         run: |
@@ -19,18 +20,24 @@ jobs:
 
       - name: Save error log as artifact
         if: failure()
-        run: echo "Napaka pri nastavlanju okolja." > error.txt
+        run: |
+          echo "Error occurred while setting up environment" > error.txt
+          mkdir -p $HOME/artifacts
+          mv error.txt $HOME/artifacts
+
         continue-on-error: true
+
         uses: actions/upload-artifact@v2
         with:
           name: error-log
-          path: error.txt
+          path: $HOME/artifacts
 
   run_tests:
     runs-on: self-hosted
     needs: setup_environment
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
         
       - name: Download artifact
         uses: actions/download-artifact@v2
@@ -42,10 +49,10 @@ jobs:
         if: always()
         run: |
           if [ -f "error.txt" ]; then
-            echo "Napaka pri nastavlanju okolja."
+            echo "Error occurred while setting up environment!"
             exit 1
           else
-            echo "Okolje uspesno nastavljeno."
+            echo "Environment set up successfully."
           fi
 
       - name: Run tests
