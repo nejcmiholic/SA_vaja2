@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name:
-        run: echo "Hello, world!"
         
       - name: Set up environment
         run: |
@@ -48,12 +45,5 @@ jobs:
           name: error-log
           path: .
 
-      - name: Check error log
-        if: always()
-        run: |
-          if [ -f "error.txt" ]; then
-            echo "Error occurred while setting up environment!"
-            exit 1
-          else
-            echo "Environment set up successfully."
-          fi
+      - name:
+        run: echo "Hello, world!"
