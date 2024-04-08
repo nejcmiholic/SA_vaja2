@@ -20,7 +20,7 @@ jobs:
       
       - name: Create error file
         run: |
-          if sudo apt update && sudo apt install -y build-essential make; then
+          if sudo apt update && sudo apt install -y build-essential make docker; then
             echo "OK" > napaka.txt
           else
             echo "Napaka" > napaka.txt
