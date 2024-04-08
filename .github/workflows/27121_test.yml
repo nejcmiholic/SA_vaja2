@@ -38,6 +38,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
+      - name: Download error log artifact
+        if: always()
+        uses: actions/download-artifact@v2
+        with:
+          name: error-log
+          path: ${{ github.workspace }}/artifacts
 
       - name:
         run: echo "Hello, world!"
