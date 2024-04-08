@@ -11,11 +11,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      
       - name: Set up environment
         run: |
           sudo apt update
           sudo apt install -y build-essential
           sudo apt install -y make
+      
+      - name: Create error file
+        run: |
+          if sudo apt update && sudo apt install -y build-essential make; then
+            echo "OK" > napaka.txt
+          else
+            echo "Napaka" > napaka.txt
+          fi
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
