@@ -20,15 +20,3 @@ jobs:
           sudo apt update
           sudo apt install -y build-essential
           sudo apt install -y make
-
-      - name: Save error log as artifact
-        if: failure()
-        run: |
-          echo "Error occurred while setting up environment" > error.txt
-          mkdir -p $HOME/artifacts
-          mv error.txt $HOME/artifacts
-        continue-on-error: true
-        uses: actions/upload-artifact@v2
-        with:
-          name: error-log
-          path: $HOME/artifacts
