@@ -41,5 +41,19 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: error-log
-      - name: Test
-        run: ls -R
+
+      - name: Check error status
+        run: |
+          error_status=$(cat napaka.txt)
+          if [ "$error_status" = "OK" ]; then
+            echo "Okolje ustvarjeno uspesno."
+          else
+            echo "Napaka pri ustvarjanju okolja."
+            exit 1
+          fi
+
+      - name: Run app
+        run: |
+          make
+          ./demo_gcc
+
