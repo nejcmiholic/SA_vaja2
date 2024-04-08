@@ -56,4 +56,3 @@ jobs:
         run: |
           make
           ./demo_gcc
-
