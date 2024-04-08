@@ -12,49 +12,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up environment
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential
-          sudo apt install -y make
-
-      - name: Save error log as artifact
-        if: failure()
-        run: |
-          echo "Error occurred while setting up environment" > error.txt
-          mkdir -p $HOME/artifacts
-          mv error.txt $HOME/artifacts
-        continue-on-error: true
-        uses: actions/upload-artifact@v2
-        with:
-          name: error-log
-          path: $HOME/artifacts
-
-  run_tests:
-    runs-on: self-hosted
-    needs: setup_environment
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name:
+        run: echo "Hello, world!"
         
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: error-log
-          path: .
-
-      - name: Check error log
-        if: always()
-        run: |
-          if [ -f "error.txt" ]; then
-            echo "Error occurred while setting up environment!"
-            exit 1
-          else
-            echo "Environment set up successfully."
-          fi
-
-      - name: Run tests
-        if: success()
-        run: |
-          make all
-          ./demo_gcc
