@@ -8,8 +8,10 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
+    env:
+      DOCKER_HOST: tcp://localhost:2375
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -22,6 +24,6 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/testni_docker:latest .
-      
+
       - name: Push Docker image to DockerHub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/testni_docker:latest
