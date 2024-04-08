@@ -10,20 +10,18 @@ jobs:
   deploy:
     runs-on: self-hosted
     if: github.event.workflow_run.conclusion == 'success'
-    env:
-      DOCKER_HOST: tcp://localhost:2375
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/testni_docker:latest -f /home/nejc/Documents/SA/vaja4/Dockerfile .
+        run: |
+          docker build . --file Dockerfile --tag nejcmiholicferi/testni_docker:latest
 
       - name: Push Docker image to DockerHub
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/testni_docker:latest
+        run: |
+          docker push nejcmiholicferi/testni_docker:latest
