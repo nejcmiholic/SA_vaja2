@@ -24,8 +24,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . --file /home/nejc/Documents/SA/vaja4/Dockerfile --tag nejcmiholicferi/testni_docker:latest
+          cd /home/nejc/Documents/SA/vaja4/
+          sudo docker build . -t vaja3:latest
 
       - name: Push Docker image to DockerHub
         run: |
-          docker push nejcmiholicferi/testni_docker:latest
+          sudo docker push nejcmiholicferi/vaja3:latest
+          
