@@ -5,7 +5,7 @@
 void print() { // print function
     printf(MSG);
 }
-
+// test 1
 int main() { // main function
     #ifdef DEBUG
     printf("Debug message\n");
