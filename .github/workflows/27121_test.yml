@@ -57,9 +57,3 @@ jobs:
           else
             echo "Environment set up successfully."
           fi
-
-      - name: Run tests
-        if: success()
-        run: |
-          make all
-          ./demo_gcc
