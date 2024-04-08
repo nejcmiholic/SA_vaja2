@@ -22,8 +22,10 @@ jobs:
         if: failure()
         run: |
           echo "Error occurred while setting up environment" > error.txt
+          ls -l
           mkdir -p $HOME/artifacts
           mv error.txt $HOME/artifacts
+          ls -l $HOME/artifacts
 
       - name: Upload error log artifact
         if: failure()
@@ -46,5 +48,5 @@ jobs:
           name: error-log
           path: ${{ github.workspace }}/artifacts
 
-      - name:
+      - name: Print message
         run: echo "Hello, world!"
