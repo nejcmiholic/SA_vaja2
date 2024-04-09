@@ -8,6 +8,9 @@ on:
 jobs:
   setup_environment:
     runs-on: self-hosted
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, ubuntu-latest]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
