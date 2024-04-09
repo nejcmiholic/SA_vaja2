@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker pull nejcmiholicferi/vaja3:latest
+sudo docker pull nejcmiholicferi/vaja3:latest
 
-docker run -i nejcmiholicferi/vaja3:latest
+sudo docker run -i nejcmiholicferi/vaja3:latest

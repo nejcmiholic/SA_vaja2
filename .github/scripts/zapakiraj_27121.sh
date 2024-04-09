@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker build . -t nejcmiholicferi/vaja3:latest
+sudo docker build . -t nejcmiholicferi/vaja3:latest
 
-echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
+echo "${DOCKER_PASSWORD}" | sudo docker login -u "${DOCKER_USERNAME}" --password-stdin
 
-docker push nejcmiholicferi/vaja3:latest
+sudo docker push nejcmiholicferi/vaja3:latest
